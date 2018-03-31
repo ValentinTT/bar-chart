@@ -1,0 +1,111 @@
+$body-bg: #53B4F0;
+$char-container-bg: #fff;
+$tooltip-bg: #131313;
+$tooltip-color: #fff;
+$bar-bg: #B14647;
+$bar-hover-bg: #B37D7D;
+$link-color: #fff;
+$footer-bg: #53B4F0;
+$link-underline-color: #000;
+
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
+body {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "chart-container" "footer";
+    background: $body-bg;
+    font-family: 'Abril Fatface', cursive;
+}
+
+footer {
+    grid-area: footer;
+    box-sizing: border-box;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $footer-bg;
+    .link {
+        font-size: 20px;
+        color: $link-color;
+        text-decoration: none;
+        display: inline-block;
+        text-decoration: none;
+        transition: color 0.5s ease-out;
+        position: relative;
+        
+        &::before, &::after {           
+            content: "";
+            background: $link-color;
+            width: 0;
+            height: 3px;
+            position: absolute;
+            bottom: -5px;
+            transition: width 0.5s ease-out, background 0.5s ease-out;
+        }
+        &::after {
+            right: 0px;
+        }
+        &:hover{
+            color: $link-underline-color;
+            opacity: 0.9;
+            &::before, &::after {
+                background: $link-underline-color;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.chart-container {
+    grid-area: chart-container;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+        background: $char-container-bg;
+        -webkit-box-shadow: -20px 10px 67px -2px rgba(0,0,0,0.6);
+        -moz-box-shadow: -20px 10px 67px -2px rgba(0,0,0,0.6);
+        box-shadow: -20px 10px 67px -2px rgba(0,0,0,0.6);
+    }
+    .chart-title {
+        font-size: 30px;
+    }
+    .bar {
+        fill: $bar-bg; 
+        &:hover {
+            fill: $bar-hover-bg;
+        }      
+    }
+    .x-axis, .y-axis {
+        text{
+            font-size: 14px;
+        }  
+    }
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    border-radius: 5px;
+    opacity: 0;
+    background: $tooltip-bg;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .tooltip-data, .tooltip-date {
+        color: $tooltip-color;
+        margin: 0;
+    }
+}
